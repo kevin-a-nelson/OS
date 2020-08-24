@@ -1,44 +1,18 @@
-// C program to print reverse of words in
-// a string.
+
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h> /* for exit() */
 
-void printReverse(char str[])
+int main(int argc, char **argv, char **envp)
 {
-    int length = strlen(str);
 
-    // Traverse string from end
-    int i;
-    for (i = length - 1; i >= 0; i--)
-    {
-        if (str[i] == ' ')
-        {
+	int i = argc; /* index into array argv[] */ 
 
-            // putting the NULL character at the
-            // position of space characters for
-            // next iteration.
-            str[i] = '\0';
+	while (i--) {
+		printf("%s ", argv[i]);
+	}
 
-            // Start from next charatcer
-            printf("%s ", &(str[i]) + 1);
-        }
-    }
+	printf("\n");
 
-    // printing the last word
-    printf("%s", str);
+	exit(argc);  /* normal exit status would be 0 */
 }
 
-// Driver code
-int main()
-{
-    // char str[] = "I AM A GEEK";
-    char str[100];
-    fgets(str, 100, stdin);
-
-    // remove new line from str
-    strtok(str, "\n");
-
-    printReverse(str);
-    printf("%s", "\n");
-    return 0;
-}

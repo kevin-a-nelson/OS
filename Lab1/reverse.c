@@ -16,3 +16,6 @@ int main(int argc, char **argv, char **envp)
 	exit(argc);  /* normal exit status would be 0 */
 }
 
+// type this in the terminal to run this file
+
+// gcc reverse.c && ./a.out a b c d e

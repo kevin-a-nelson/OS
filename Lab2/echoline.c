@@ -11,13 +11,13 @@ int main()
 
 	if( buffer == NULL)
 	{
-	exit(1);
+		exit(1);
 	}
 
 	printf("Enter a sentence: ");
 	chars = getline(&buffer,&bufsize,stdin);
-	printf("You entered: %s",buffer);
-	printf("Length: %zu\n", chars);
+	printf("You entered: %s\n",buffer);
+	printf("Length: %zu\n", chars + 1);
 
 	return(0);
 }

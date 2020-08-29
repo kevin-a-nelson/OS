@@ -13,7 +13,7 @@ struct name
 
 enum status_value
 {
-    NORMAL = 1,
+    SUCCESS = 1,
     EOF_OR_ERROR = 0
 };
 
@@ -32,7 +32,7 @@ int read_name(struct name *input_name)
 
     printf("%s \n", input_name->tok[0]);
 
-    enum status_value status = NORMAL;
+    enum status_value status = SUCCESS;
 
     if (input_name->tok == NULL)
     {
@@ -41,7 +41,7 @@ int read_name(struct name *input_name)
     }
     else
     {
-        return NORMAL;
+        return SUCCESS;
     }
 }
 

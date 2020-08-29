@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 int input(char *s, int length);
 
@@ -9,48 +10,64 @@ struct name
 	int count;
 };
 
-// #define MAXTOKS char[size_of(name->tok)];
+#define MAXTOKS char[size_of(name->tok)];
 
 enum status_value
 {
-	NORMAL = 1,
+	SUCCESS = 1,
 	EOF_OR_ERROR = 0
 };
 
-int read_name()
+int getFirstWhiteSpaceIdx(char chars[])
 {
-	struct name input_name;
+	int index = 0;
+	while (chars[index])
+	{
+		if (isspace(chars[index]))
+		{
+			return index;
+		}
+		index++;
+	}
+	return index;
+}
 
-	char **input_tok;
+int read_name(struct name *input_name)
+{
+	char buffer[100];
+	char *tok[100];
 
-	size_t buff_size = 32;
-	char *buffer;
+	// get input
+	printf("Type something: ");
+	fgets(buffer, 100, stdin);
 
-	getline(&buffer, &buff_size, stdin);
+	char empty_buffer[100];
+	tok[0] = empty_buffer;
 
-	input_tok[0] = buffer;
+	int firstWhiteSpaceIdx = getFirstWhiteSpaceIdx(buffer);
 
-	input_name.tok = input_tok;
+	for (int i = 0; i < firstWhiteSpaceIdx; i++)
+	{
+		tok[0][i] = buffer[i];
+	}
 
-	printf("%s\n", input_name.tok[0]);
-	return 1;
+	input_name->tok = tok;
+
+	return SUCCESS;
 }
 
 int main()
 {
 	struct name input_name;
 
-	char **input_tok;
+	if (read_name(&input_name))
+	{
+		printf("%s\n", input_name.tok[0]);
+	}
+	else
+	{
+		printf("Error in input.");
+	}
 
-	size_t buff_size = 32;
-	char *buffer;
-
-	getline(&buffer, &buff_size, stdin);
-
-	input_tok[0] = buffer;
-
-	input_name.tok = input_tok;
-
-	printf("%s\n", input_name.tok[0]);
-	return 1;
+	return (0);
 }

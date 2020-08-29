@@ -12,6 +12,7 @@ int main()
     struct name input_name;
 
     char **input_tok;
+
     size_t buff_size = 32;
     char *buffer;
 

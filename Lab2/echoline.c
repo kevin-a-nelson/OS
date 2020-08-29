@@ -13,36 +13,39 @@ struct name
 
 enum status_value
 {
-	NORMAL,
-	EOF_OR_ERROR
+	NORMAL = 1,
+	EOF_OR_ERROR = 0
 };
 
-int read_name(struct name *input_name)
+int read_name(struct name input_name)
 {
-	size_t buff_size = 32;
-	size_t chars;
-	char c = 'a';
-	char *buffer;
-	// enum status_value status = NORMAL;
-	// printf("Input a line: ");
-	// chars = getline(&buffer, &buff_size, stdin);
-	input_name->tok[0] = buffer;
-	// printf("You input: %s", &input_name->tok[0]);
-	// printf("You input %zu chars. \n", chars);
 
-	if (input_name->tok == NULL)
+	char **input_tok;
+
+	size_t buff_size = 32;
+	char *buffer;
+
+	getline(&buffer, &buff_size, stdin);
+
+	input_tok[0] = buffer;
+
+	input_name.tok = input_tok;
+
+	printf("%s\n", input_name.tok[0]);
+
+	if (input_name.tok[0] == NULL)
 	{
-		return 0;
+		return NORMAL;
 	}
 	else
 	{
-		return 1;
+		return EOF_OR_ERROR;
 	}
 }
 
 int main()
 {
-	struct name *input_name;
+	struct name input_name;
 
 	if (read_name(input_name))
 	{
@@ -50,7 +53,7 @@ int main()
 	}
 	else
 	{
-		printf("You typed: %s.\n", input_name->tok[0]);
+		// printf("You typed: %s.\n", input_name.tok[0]);
 	}
 
 	return (0);

@@ -1,43 +1,57 @@
-/* example of struct in C. RAB 1/2001 */
 #include <stdio.h>
+#include <stdlib.h>
+
+int input(char *s, int length);
+
 struct name
 {
+	char **tok;
 	int count;
-	char *input_name;
-	int status;
+};
+
+#define MAXTOKS char[size_of(name->tok)];
+
+enum status_value
+{
+	NORMAL,
+	EOF_OR_ERROR
 };
 
 int read_name(struct name *input_name)
 {
-	size_t bufsize = 32;
+	size_t buff_size = 32;
 	size_t chars;
+	char c = 'a';
+	char *buffer;
+	// enum status_value status = NORMAL;
+	// printf("Input a line: ");
+	// chars = getline(&buffer, &buff_size, stdin);
+	input_name->tok[0] = buffer;
+	// printf("You input: %s", &input_name->tok[0]);
+	// printf("You input %zu chars. \n", chars);
 
-	printf("Enter a sentence: ");
-	chars = getline(&input_name->input_name, &bufsize, stdin);
-
-	if (input_name->input_name == NULL)
+	if (input_name->tok == NULL)
 	{
 		return 0;
 	}
-
-	input_name->status = 1;
-
-	return 1;
+	else
+	{
+		return 1;
+	}
 }
 
-/* main program */
 int main()
 {
-	struct name input_name;
+	struct name *input_name;
 
-	if (!read_name(&input_name))
+	if (read_name(input_name))
 	{
-		printf("Unable to read name successfully\n");
+		printf("Error in input.");
 	}
 	else
 	{
-		printf("You entered: %s\n", input_name.input_name);
+		printf("You typed: %s.\n", input_name->tok[0]);
 	}
 
-	return 0;
+	return (0);
 }

@@ -10,12 +10,13 @@ struct name
 	int count;
 };
 
-#define MAXTOKS char[size_of(name->tok)];
+#define MAXTOKS 100
 
 enum status_value
 {
 	SUCCESS = 1,
-	EOF_OR_ERROR = 0
+	EOF_OR_ERROR = 0,
+	TOO_MANY_TOKENS = 0,
 };
 
 int getFirstWhiteSpaceIdx(char chars[])
@@ -46,12 +47,24 @@ int read_name(struct name *input_name)
 
 	int firstWhiteSpaceIdx = getFirstWhiteSpaceIdx(buffer);
 
-	for (int i = 0; i < firstWhiteSpaceIdx; i++)
+	int bufferIdx = 0;
+	int count = 0;
+
+	while (buffer[bufferIdx])
 	{
-		tok[0][i] = buffer[i];
+		tok[0][bufferIdx] = buffer[bufferIdx];
+		count++;
+
+		if (count > MAXTOKS)
+		{
+			return TOO_MANY_TOKENS;
+		}
+
+		bufferIdx++;
 	}
 
 	input_name->tok = tok;
+	input_name->count = count;
 
 	return SUCCESS;
 }

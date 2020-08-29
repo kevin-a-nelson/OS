@@ -9,7 +9,7 @@ struct name
 	int count;
 };
 
-#define MAXTOKS char[size_of(name->tok)];
+// #define MAXTOKS char[size_of(name->tok)];
 
 enum status_value
 {
@@ -17,8 +17,9 @@ enum status_value
 	EOF_OR_ERROR = 0
 };
 
-int read_name(struct name input_name)
+int read_name()
 {
+	struct name input_name;
 
 	char **input_tok;
 
@@ -32,29 +33,24 @@ int read_name(struct name input_name)
 	input_name.tok = input_tok;
 
 	printf("%s\n", input_name.tok[0]);
-
-	if (input_name.tok[0] == NULL)
-	{
-		return NORMAL;
-	}
-	else
-	{
-		return EOF_OR_ERROR;
-	}
+	return 1;
 }
 
 int main()
 {
 	struct name input_name;
 
-	if (read_name(input_name))
-	{
-		printf("Error in input.");
-	}
-	else
-	{
-		// printf("You typed: %s.\n", input_name.tok[0]);
-	}
+	char **input_tok;
 
-	return (0);
+	size_t buff_size = 32;
+	char *buffer;
+
+	getline(&buffer, &buff_size, stdin);
+
+	input_tok[0] = buffer;
+
+	input_name.tok = input_tok;
+
+	printf("%s\n", input_name.tok[0]);
+	return 1;
 }

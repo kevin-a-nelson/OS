@@ -8,7 +8,6 @@ struct name
 
 int main()
 {
-
     struct name input_name;
 
     char **input_tok;
@@ -21,6 +20,8 @@ int main()
     input_tok[0] = buffer;
 
     input_name.tok = input_tok;
+
+    printf("%c\n", input_name.tok[0][0]);
 
     printf("%s\n", input_name.tok[0]);
 }

@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <string.h>
+#include <sys/wait.h> // for wait()
 
 int input(char *s, int length);
 
@@ -94,7 +95,10 @@ int main()
 	}
 	else
 	{
+		sleep(2);
+		wait(NULL);
 		printf("this is the parent: my pid is %d and I have a child with pid %d \n", getpid(), pid);
 	}
+
 	return (0);
 }

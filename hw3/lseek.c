@@ -20,7 +20,7 @@ int main()
     // read all of the bytes
     while (read(f_write, arr, 1))
     {
-        lseek(f_write, 0, SEEK_CUR);
+        lseek(f_write, 2, SEEK_CUR);
         write(f_read, arr, 1);
     }
 

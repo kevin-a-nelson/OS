@@ -1,1 +1,1 @@
-123456789
+This will also be output to the file named dup.txt

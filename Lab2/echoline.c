@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <string.h>
 
 int input(char *s, int length);
 
@@ -81,6 +84,14 @@ int main()
 	{
 		printf("Error in input.");
 	}
+
+	char *newargv[] = {NULL, NULL, NULL, NULL};
+
+	newargv[0] = "pwd";
+
+	execve("/bin/pwd", newargv, NULL);
+
+	// execl("/bin/ls", input_name.tok[0], NULL);
 
 	return (0);
 }

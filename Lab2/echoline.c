@@ -78,18 +78,16 @@ int main()
 
 	if (read_name(&input_name))
 	{
-		printf("%s\n", input_name.tok[0]);
+		// printf("%s\n", input_name.tok[0]);
 	}
 	else
 	{
 		printf("Error in input.");
 	}
 
-	char *newargv[] = {NULL, NULL, NULL, NULL};
-
-	newargv[0] = "pwd";
-
-	execve("/bin/pwd", newargv, NULL);
+	char *commands[] = {NULL, NULL, NULL, NULL};
+	commands[0] = "ls";
+	execve("/bin/ls", commands, NULL);
 
 	// execl("/bin/ls", input_name.tok[0], NULL);
 

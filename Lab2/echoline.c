@@ -85,11 +85,16 @@ int main()
 		printf("Error in input.");
 	}
 
-	char *commands[] = {NULL, NULL, NULL, NULL};
-	commands[0] = "ls";
-	execve("/bin/ls", commands, NULL);
-
-	// execl("/bin/ls", input_name.tok[0], NULL);
-
+	pid_t pid = fork();
+	if (pid == 0)
+	{
+		printf("this is a child: my new unique pid is %d\n", getpid());
+		char *commands[] = {"ls", NULL, NULL, NULL};
+		execve("/bin/ls", commands, NULL);
+	}
+	else
+	{
+		printf("this is the parent: my pid is %d and I have a child with pid %d \n", getpid(), pid);
+	}
 	return (0);
 }

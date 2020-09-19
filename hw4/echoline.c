@@ -86,16 +86,18 @@ int main()
 		printf("Error in input.");
 	}
 
-	if (fork() == 0)
+	pid_t pid = fork();
+	if (pid == 0)
 	{
-		printf("Child running\n");
+		printf("this is a child: my new unique pid is %d\n", getpid());
 		char *commands[] = {"ls", NULL, NULL, NULL};
 		execve("/bin/ls", commands, NULL);
 	}
 	else
 	{
+		sleep(2);
 		wait(NULL);
-		printf("Parent running\n");
+		printf("this is the parent: my pid is %d and I have a child with pid %d \n", getpid(), pid);
 	}
 
 	return (0);

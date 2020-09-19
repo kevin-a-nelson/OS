@@ -4,6 +4,20 @@
 #include <string.h>
 #include <stdlib.h>
 
+char* concat(const char *s1, const char *s2)
+{
+    char *result = malloc(strlen(s1) + strlen(s2) + 1); // +1 for the null-terminator
+    // in real code you would check for errors in malloc here
+    strcpy(result, s1);
+    strcat(result, s2);
+    return result;
+}
+
+char** getWords(char* str) {
+
+    return "lol";
+}
+
 void getAndRunCommand()
 {
     if (fork() == 0)
@@ -13,10 +27,13 @@ void getAndRunCommand()
         int i, lengthOfWord, numberOfWords;
 
         printf(">> ");
-        fgets(userInput, sizeof userInput, stdin);
+
+        // Get input until "\n" ( where the user hits enter )
+        scanf("%[^\n]%*c", userInput);
 
         lengthOfWord = 0;
         numberOfWords = 0;
+
         for (i = 0; i <= (strlen(userInput)); i++)
         {
             // if space or NULL found, assign NULL into newString[ctr]
@@ -39,7 +56,11 @@ void getAndRunCommand()
             commands[i] = userInputWords[i];
         }
 
-        execve("/bin/ls", commands, NULL);
+        char* pathToBin = "/bin/";
+        char* firstCommand = commands[0];
+        char* pathToCommand = concat(pathToBin, firstCommand);
+
+        execve(pathToCommand, commands, NULL);
     }
     else
     {
@@ -49,7 +70,7 @@ void getAndRunCommand()
 
 int main(void)
 {
-    printf("\n\n Welcome to nelsonOS!\n");
+    printf("\n\nWelcome to nelsonOS!\n");
     printf("---------------------------------------\n");
     while(1) {
         getAndRunCommand();

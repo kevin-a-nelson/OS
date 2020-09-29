@@ -9,9 +9,9 @@ pthread_mutex_t count_mutex;
 
 void *pthreadsFunction(void*)
 {
-    pthread_mutex_lock(&count_mutex);
+    // pthread_mutex_lock(&count_mutex);
     val += 2;
-    pthread_mutex_unlock(&count_mutex);
+    // pthread_mutex_unlock(&count_mutex);
     sleep(1);
     printf("I am the PTHREAD. My pid is %d\n", getpid());
     return NULL;

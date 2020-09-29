@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-int val = 10;
+int val = 12;
 pthread_mutex_t count_mutex;
 
 void *pthreadsFunction(void*)

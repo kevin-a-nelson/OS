@@ -146,6 +146,8 @@ int main(int argc, char *argv[])
                 printf("Error code %d returned\n", ret_val);
             else
                 printf("%d bytes written\n", ret_val);
+                close(ret_val);
+
 
             /***** quit command *****/
         }

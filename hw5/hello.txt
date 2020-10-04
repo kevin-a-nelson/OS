@@ -1,1 +1,1 @@
-read hello
+read this string
